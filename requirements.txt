@@ -1,0 +1,33 @@
+# API & web
+fastapi
+uvicorn
+
+# LLM
+google-generativeai
+
+# Vector DB
+psycopg2-binary
+pgvector
+
+# Orchestration
+langgraph
+langchain-core
+
+# PDF parsing
+pdfplumber
+PyMuPDF
+
+# Embeddings & reranking
+sentence-transformers
+torch
+
+# BM25
+rank-bm25
+
+# Data validation
+pydantic
+pydantic-settings
+
+# Utilities
+python-dotenv
+tqdm
