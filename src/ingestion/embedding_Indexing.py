@@ -23,7 +23,7 @@ def get_connection():
         password=os.getenv("DB_PASSWORD")
     )
 
-
+#instering into the postgresSQL
 def insert_document(cur, record):
     cur.execute("""
         INSERT INTO documents (doc_id, filename, title, source, total_pages)
