@@ -7,7 +7,7 @@ def extract_pdf(doc_id: str, file_path: str, source: str, title: str):
     reader = PdfReader(file_path)
     pages = []
 
-    for i, page in enumerate(reader):
+    for i, page in enumerate(reader.pages):
         text = page.extract_text() or ""
         pages.append({
             "page_number": i + 1,
