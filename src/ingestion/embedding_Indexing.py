@@ -13,7 +13,6 @@ print("Loading embedding model...")
 model = SentenceTransformer("BAAI/bge-small-en-v1.5")
 print("Model loaded.")
 
-
 def get_connection():
     return psycopg2.connect(
         host=os.getenv("DB_HOST"),
@@ -78,7 +77,6 @@ def run_ingestion():
     cur.close()
     conn.close()
     print(f"\nDone. Total chunks ingested: {total_chunks}")
-
 
 if __name__ == "__main__":
     run_ingestion()

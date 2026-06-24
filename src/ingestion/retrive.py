@@ -49,3 +49,37 @@ def vector_search(query: str, top_k: int = TOP_K_RETRIEVE):
             "vector_score": float(row[6])
         })
     return results
+
+def bm25_search(query: str, top_k: int = TOP_K_RETRIEVE):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""
+    SELECT c.chunk_id, c.doc_id, c.page_number, c.text,
+            d.filename, d.source,
+    FROM chunks c
+    JOIN documents d ON c.doc_id = d.doc_id
+                """)
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    corpus = [row[3].split() for row in rows]
+    bm25 = BM25Okapi(corpus)
+    scores = bm25.get_scores(query.split())
+
+    scored_rows = list(zip(rows, scores))
+    scored_rows.sort(key=lambda x: x[1], reverse=True)
+    top_rows = scored_rows[:top_k]
+
+    results = []
+    for row, score in top_rows:
+        results.append({
+            "chunk_id": row[0],
+            "doc_id": row[1],
+            "page_number": row[2],
+            "text": row[3],
+            "filename": row[4],
+            "source": row[5],
+            "bm25_score": float(score)
+        })
+    return results
