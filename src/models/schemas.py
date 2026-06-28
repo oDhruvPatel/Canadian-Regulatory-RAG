@@ -31,7 +31,6 @@ class ChunkRecord(BaseModel):
 
 # Retrieval models
 
-
 class RetrievedChunk(BaseModel):
     """A chunk returned from vector/BM25 search, before reranking."""
     chunk_id: str
@@ -43,7 +42,6 @@ class RetrievedChunk(BaseModel):
     vector_score: float = 0.0
     bm25_score: float = 0.0
     rrf_score: float = 0.0
-
 
 class RankedChunk(BaseModel):
     """A chunk after cross-encoder reranking."""
